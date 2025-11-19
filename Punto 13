@@ -1,0 +1,53 @@
+// Programación de Dispositivos Electrónicos
+// Algoritmos - Procesamiento datos - Listas
+// grupo chapeton quintana sfrazzetta
+// ejecicio 13, hecho por chapeton
+#define N 10
+int lista[N];
+bool ejecutado = false; 
+
+void mostrarLista(int *pLista, int tam) {
+  for (int i = 0; i < tam; i++) {
+    Serial.print("Posicion ");
+    Serial.print(i);
+    Serial.print(": ");
+    Serial.println(pLista[i]);
+  }
+  Serial.println();
+}
+
+void ordenarAscendente(int *pLista, int tam) {
+  int aux;
+  for (int i = 0; i < tam - 1; i++) {
+    for (int j = i + 1; j < tam; j++) {
+      if (pLista[i] > pLista[j]) {
+        aux = pLista[i];
+        pLista[i] = pLista[j];
+        pLista[j] = aux;
+      }
+    }
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  randomSeed(analogRead(A0));
+
+  for (int i = 0; i < N; i++) {
+    lista[i] = random(10, 100);
+  }
+}
+
+void loop() {
+  if (!ejecutado) {
+    Serial.println("Lista original:");
+    mostrarLista(lista, N);
+
+    ordenarAscendente(lista, N);
+
+    Serial.println("Lista ordenada en forma ascendente:");
+    mostrarLista(lista, N);
+
+    ejecutado = true; 
+  }
+}
