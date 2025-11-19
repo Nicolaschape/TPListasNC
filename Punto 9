@@ -1,0 +1,44 @@
+// Programación de Dispositivos Electrónicos
+// Algoritmos - Procesamiento datos - Listas
+// grupo chapeton quintana sfrazzetta
+// ejecicio 9, hecho por chapeton
+#define N 10
+int lista[N];
+bool ejecutado = false; 
+
+void mostrarLista(int *pLista, int tam) {
+  Serial.println("\nContenido de la lista:");
+  for (int i = 0; i < tam; i++) {
+    Serial.print("Posicion ");
+    Serial.print(i);
+    Serial.print(": ");
+    Serial.println(pLista[i]);
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  randomSeed(analogRead(A0));
+
+  for (int i = 0; i < N; i++) {
+    lista[i] = random(10, 100);
+  }
+}
+
+void loop() {
+  if (!ejecutado) {
+    mostrarLista(lista, N);
+
+    int maximo = lista[0];
+    for (int i = 1; i < N; i++) {
+      if (lista[i] > maximo) {
+        maximo = lista[i];
+      }
+    }
+
+    Serial.print("\nEl valor maximo en la lista es: ");
+    Serial.println(maximo);
+
+    ejecutado = true;
+  }
+}
